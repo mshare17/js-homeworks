@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>The work with DOM</title>
 
     <style>
@@ -26,25 +26,76 @@
         }
 
         .wrapper {
-            height: 100vh;
+            padding: 32px 12px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
 
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-count {
+            box-sizing: border-box;
+            margin-right: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border: 1px solid #444444;
+            background-color: transparent;
+            border-radius: 8px;
+            height: 36px;
+            color: #ffffff;
+            outline: none;
+            transition: border-color .3s;
+        }
+
+        .input-count:hover,
+        .input-count:focus {
+            border-color: #dddddd;
+        }
+
+        .input-color {
+            background-color: transparent;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            width: 64px;
+            height: 36px;
+        }
+
         .blocks {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
+            max-width: 760px;
         }
 
         .block {
+            flex-shrink: 0;
+            margin: 12px;
             padding: 12px;
-            border: 1px solid #ffffff;
+            border: 1px solid #444444;
+            color: #dddddd;
+            border-radius: 8px;
+            width: 64px;
+            height: 64px;
+            animation: 2s in;
+            animation-fill-mode: forwards;
         }
 
-        .block:nth-of-type(n + 2) {
-            margin-left: 10px;
+        @keyframes in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -75,7 +126,7 @@
         }
         
         const isEven = (num) => num % 2 ? false : true;
-        
+
         let countColorChanges = 0; 
 
         const changeColor = (event) => {
@@ -93,8 +144,6 @@
 
         inputCountElem.addEventListener('change', addBlocks);
         inputColorElem.addEventListener('change', changeColor);
-
-
     </script>
 </body>
 </html>
