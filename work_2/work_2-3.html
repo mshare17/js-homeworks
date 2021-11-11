@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The work with DOM</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        .wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .blocks {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .block {
+            padding: 12px;
+            border: 1px solid #ffffff;
+        }
+
+        .block:nth-of-type(n + 2) {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="actions">
+            <input class="input-count" type="number">
+            <input class="input-color" type="color">
+        </div>
+      
+        <ul class="blocks"></ul>
+    </div>
+
+    <script>
+        const inputCountElem = document.querySelector('.input-count');
+        const inputColorElem = document.querySelector('.input-color');
+        const blocksElem = document.querySelector('.blocks');
+
+        const addBlocks = (event) => {
+            blocksElem.innerHTML = '';
+
+            for (let i = 1; i <= event.target.value; i++){
+                const blockElem = document.createElement('li');
+                blockElem.classList.add("block");
+                blockElem.textContent = i;
+                blocksElem.insertAdjacentElement("beforeend", blockElem);
+            } 
+        }
+        
+        const isEven = (num) => num % 2 ? false : true;
+        
+        let countColorChanges = 0; 
+
+        const changeColor = (event) => {
+            countColorChanges++;
+            const allBlocks = document.querySelectorAll('.block');
+
+            for (let i = 0; i < allBlocks.length; i++) {
+                if (isEven(countColorChanges) === isEven(i + 1)) {
+                    allBlocks[i].style.backgroundColor = event.target.value;
+                } else {
+                    allBlocks[i].style.backgroundColor = "transparent";
+                }
+            }
+        }
+
+        inputCountElem.addEventListener('change', addBlocks);
+        inputColorElem.addEventListener('change', changeColor);
+
+
+    </script>
+</body>
+</html>
